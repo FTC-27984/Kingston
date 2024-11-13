@@ -1,0 +1,13 @@
+package org.firstinspires.ftc.teamcode;
+
+public class Constants {
+
+    public static final class DriveTrainConstants {
+
+        public static final String frontLeftMotor = "frontLeft0";
+        public static final String frontRightMotor = "frontRight1";
+        public static final String backLeftMotor = "backLeft2";
+        public static final String backRightMotor = "backRight3";
+    }
+
+}
