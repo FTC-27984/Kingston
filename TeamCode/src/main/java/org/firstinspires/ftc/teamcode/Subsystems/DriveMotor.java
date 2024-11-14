@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Constants;
 
 public class DriveMotor {
 
-    private DcMotor motor;
+    private final DcMotor motor;
     private long lastTime;
     private int lastPosition;
 
