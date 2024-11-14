@@ -28,6 +28,7 @@ public class GreasyTeleOp extends LinearOpMode {
                 s_DriveTrain.resetYaw();
             }
 
+            s_DriveTrain.periodic(telemetry);
             telemetry.update();
         }
     }

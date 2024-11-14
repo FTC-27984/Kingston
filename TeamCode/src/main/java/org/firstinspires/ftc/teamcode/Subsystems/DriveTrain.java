@@ -15,10 +15,10 @@ import org.firstinspires.ftc.teamcode.Constants.DriveTrainConstants;
 
 public class DriveTrain {
 
-    private DcMotor frontLeft0;
-    private DcMotor frontRight1;
-    private DcMotor backLeft2;
-    private DcMotor backRight3;
+    private DriveMotor frontLeft0;
+    private DriveMotor frontRight1;
+    private DriveMotor backLeft2;
+    private DriveMotor backRight3;
 
     private BNO055IMU imu;
 
@@ -26,15 +26,10 @@ public class DriveTrain {
     private double yawOffset = 0;
 
     public DriveTrain(HardwareMap hardwareMap) {
-        frontLeft0 = hardwareMap.get(DcMotor.class, DriveTrainConstants.frontLeftMotor);
-        frontRight1 = hardwareMap.get(DcMotor.class, DriveTrainConstants.frontRightMotor);
-        backLeft2 = hardwareMap.get(DcMotor.class, DriveTrainConstants.backLeftMotor);
-        backRight3 = hardwareMap.get(DcMotor.class, DriveTrainConstants.backRightMotor);
-
-        frontLeft0 = runConfig(frontLeft0);
-        frontRight1 = runConfig(frontRight1);
-        backLeft2 = runConfig(backLeft2);
-        backRight3 = runConfig(backRight3);
+        frontLeft0 = new DriveMotor(hardwareMap, DriveTrainConstants.frontLeftMotor);
+        frontRight1 = new DriveMotor(hardwareMap, DriveTrainConstants.frontRightMotor);
+        backLeft2 = new DriveMotor(hardwareMap, DriveTrainConstants.backLeftMotor);
+        backRight3 = new DriveMotor(hardwareMap, DriveTrainConstants.backRightMotor);
 
         frontLeft0.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight1.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -66,14 +61,10 @@ public class DriveTrain {
         double frontRightPower = (rotY - rotX - rotation) / denominator;
         double backRightPower = (rotY + rotX - rotation) / denominator;
 
-        setPower(frontLeftPower, frontRightPower, backLeftPower, backRightPower);
-    }
-
-    public void setPower(double frontLeft, double frontRight, double backLeft, double backRight) {
-        frontLeft0.setPower(frontLeft);
-        frontRight1.setPower(frontRight);
-        backLeft2.setPower(backLeft);
-        backRight3.setPower(backRight);
+        frontLeft0.setPower(frontLeftPower);
+        frontRight1.setPower(frontRightPower);
+        backLeft2.setPower(backLeftPower);
+        backRight3.setPower(backRightPower);
     }
 
     /**
@@ -107,26 +98,20 @@ public class DriveTrain {
         return heading;
     }
 
-    /**
-     * Configuration for drivetrain motors
-     *
-     * @param motor DcMotor to configure
-     * @return configured motor
-     */
-    public DcMotor runConfig(DcMotor motor) {
-        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        return motor;
-    }
-
     public void periodic(Telemetry telemetry) {
         telemetry.addLine("Drive train");
         telemetry.addData("Heading: ", getHeading());
-        telemetry.addData("Front Left: ", frontLeft0.getPower());
-        telemetry.addData("Front Right: ", frontRight1.getPower());
-        telemetry.addData("Back Left: ", backLeft2.getPower());
-        telemetry.addData("Back Right: ", backRight3.getPower());
+
+        telemetry.addData("Front Left Power: ", frontLeft0.getPower());
+        telemetry.addData("Front Left RPM: ", frontLeft0.getRPM());
+
+        telemetry.addData("Front Right Power: ", frontRight1.getPower());
+        telemetry.addData("Front Right RPM: ", frontRight1.getRPM());
+
+        telemetry.addData("Back Left Power: ", backLeft2.getPower());
+        telemetry.addData("Back Left RPM: ", backLeft2.getRPM());
+
+        telemetry.addData("Back Right Power: ", backRight3.getPower());
+        telemetry.addData("Back Right RPM: ", backRight3.getRPM());
     }
 }

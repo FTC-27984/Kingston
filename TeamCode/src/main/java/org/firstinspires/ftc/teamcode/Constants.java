@@ -10,6 +10,8 @@ public class Constants {
         public static final String backRightMotor = "backRight3";
 
         public static final double strafingBalancer = 1.1;
+
+        public static final double ticksPerRevolution = 537.6; //Ticks per revolution on the NeveRest Orbital 20 Gearmotor
     }
 
 }
