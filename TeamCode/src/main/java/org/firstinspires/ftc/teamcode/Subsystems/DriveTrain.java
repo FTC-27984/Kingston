@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -10,7 +9,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Constants.DriveTrainConstants;
 
 public class DriveTrain {
@@ -23,7 +21,7 @@ public class DriveTrain {
     private BNO055IMU imu;
 
     private Orientation angles;
-    private double yawOffset = 0;
+    private double yawOffset = 0.0;
 
     public DriveTrain(HardwareMap hardwareMap) {
         frontLeft0 = new DriveMotor(hardwareMap, DriveTrainConstants.frontLeftMotor);
@@ -40,31 +38,37 @@ public class DriveTrain {
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         imu.initialize(parameters);
+
+        yawOffset = imu.getAngularOrientation().firstAngle;
     }
 
-    public void drive(double ySpeed, double xSpeed, double rotation, boolean fieldOriented) {
+    public void drive(double driveY, double driveX, double rotation) {
 
-        double rotY = ySpeed;
-        double rotX = xSpeed * DriveTrainConstants.strafingBalancer;
+        double botHeading = getHeading();
+        double headingRadians = Math.toRadians(botHeading);
 
-        if (fieldOriented) {
-            double botHeading = getHeading();
 
-            // Rotate the movement direction counter to the bot's rotation
-            rotX = xSpeed * Math.cos(-botHeading) - ySpeed * Math.sin(-botHeading);
-            rotY = xSpeed * Math.sin(-botHeading) + ySpeed * Math.cos(-botHeading);
-        }
+        // Rotate the movement direction counter to the bot's rotation
 
-        double denominator = Math.max(Math.abs(ySpeed) + Math.abs(xSpeed) + Math.abs(rotation), 1);
-        double frontLeftPower = (rotY + rotX + rotation) / denominator;
-        double backLeftPower = (rotY - rotX + rotation) / denominator;
-        double frontRightPower = (rotY - rotX - rotation) / denominator;
-        double backRightPower = (rotY + rotX - rotation) / denominator;
+        double sin = Math.sin(-headingRadians);
+        double cos = Math.cos(-headingRadians);
 
-        frontLeft0.setPower(frontLeftPower);
-        frontRight1.setPower(frontRightPower);
-        backLeft2.setPower(backLeftPower);
-        backRight3.setPower(backRightPower);
+        double fieldOrientedX = driveX * cos - driveY * sin;
+        double fieldOrientedY = driveX * sin + driveY * cos;
+
+        //fieldOrientedX *= DriveTrainConstants.strafingBalancer;  // Counteract imperfect strafing
+
+        double denominator = Math.max(Math.abs(fieldOrientedY) + Math.abs(fieldOrientedX) + Math.abs(rotation), 1);
+
+        double frontLeftPower = (fieldOrientedY + fieldOrientedX + rotation) / denominator;
+        double backLeftPower = (fieldOrientedY - fieldOrientedX + rotation) / denominator;
+        double frontRightPower = (fieldOrientedY - fieldOrientedX - rotation) / denominator;
+        double backRightPower = (fieldOrientedY + fieldOrientedX - rotation) / denominator;
+
+        frontLeft0.set(frontLeftPower);
+        frontRight1.set(frontRightPower);
+        backLeft2.set(backLeftPower);
+        backRight3.set(backRightPower);
     }
 
     /**
@@ -92,8 +96,12 @@ public class DriveTrain {
     public double getHeading() {
         double heading = getRawHeading() - yawOffset;
 
-        if (heading > 180) heading -= 360;
-        if (heading < -180) heading += 360;
+        if (heading > 180) {
+            heading -= 360;
+        }
+        if (heading < -180) {
+            heading += 360;
+        }
 
         return heading;
     }

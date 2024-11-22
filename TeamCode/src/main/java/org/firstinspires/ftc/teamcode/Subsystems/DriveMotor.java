@@ -23,7 +23,7 @@ public class DriveMotor {
         motor.setDirection(direction);
     }
 
-    public void setPower(double power) {
+    public void set(double power) {
         motor.setPower(power);
     }
 

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Subsystems.DriveTrain;
 
-@TeleOp(name = "greasy", group = "teamCode")
+@TeleOp(name = "greasy", group = "TeleOp")
 public class GreasyTeleOp extends LinearOpMode {
     DriveTrain s_DriveTrain;
 
@@ -19,10 +19,11 @@ public class GreasyTeleOp extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            s_DriveTrain.drive(-gamepad1.left_stick_y,
+            s_DriveTrain.drive(
+                    -gamepad1.left_stick_y,
                     gamepad1.left_stick_x,
-                    gamepad1.right_stick_x,
-                    true);
+                    gamepad1.right_stick_x
+            );
 
             if (gamepad1.options) {
                 s_DriveTrain.resetYaw();
