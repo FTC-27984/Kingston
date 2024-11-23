@@ -38,14 +38,15 @@ public class GreasyTeleOp extends LinearOpMode {
                 s_DriveTrain.resetYaw();
             }
 
+            //s_Intake.setIntakePower(gamepad1.right_trigger - gamepad1.left_trigger);
             if (gamepad1.right_trigger > 0) {
-                s_Intake.setIntakePower(1);
+              s_Intake.setIntakePower(1);
                 s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
             } else if (gamepad1.left_trigger > 0) {
-                s_Intake.setIntakePower(-1);
+               s_Intake.setIntakePower(-1);
                 s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
             } else {
-                s_Intake.setIntakePower(0);
+               s_Intake.setIntakePower(0);
             }
 
             if (gamepad1.right_bumper){
@@ -54,6 +55,10 @@ public class GreasyTeleOp extends LinearOpMode {
             } else if (gamepad1.left_bumper){
                 s_Wrist.setAngle(Constants.WristConstants.barAngle);
                 //Will pull in horizontal slides
+            }
+
+            if(gamepad1.dpad_down){
+                s_Wrist.setAngle(Constants.WristConstants.transferAngle);
             }
 
             s_DriveTrain.periodic(telemetry);

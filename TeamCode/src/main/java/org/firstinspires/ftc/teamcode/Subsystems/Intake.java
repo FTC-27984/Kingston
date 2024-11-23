@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Constants;
 
@@ -18,7 +17,7 @@ public class Intake {
     }
 
     public void setIntakePower(double power) {
-        leftIntake0.setPower(1);
-        rightIntake1.setPower(1);
+        leftIntake0.setPower(power);
+        rightIntake1.setPower(power);
     }
 }

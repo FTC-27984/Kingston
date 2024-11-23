@@ -19,7 +19,7 @@ public class Wrist {
         rightWrist3 = hardwareMap.get(Servo.class, WristConstants.rightWrist3);
 
         leftWrist2.setDirection(WristConstants.wristInvertL);
-        rightWrist3.setDirection(WristConstants.wristInverR);
+        rightWrist3.setDirection(WristConstants.wristInvertR);
     }
 
     public double getLeftAngle() {

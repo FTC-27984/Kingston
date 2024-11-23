@@ -21,17 +21,17 @@ public class Constants {
     public static final class WristConstants {
         public static final String leftWrist2 = "leftWrist2";
         public static final String rightWrist3 = "rightWrist3";
-        public static final double intakeAngle = 0;
+        public static final double intakeAngle = 0.10;
         public static final double transferAngle = 0;
         public static final double barAngle = 0.50;
         public static final Servo.Direction wristInvertL = Servo.Direction.FORWARD;
-        public static final Servo.Direction wristInverR = Servo.Direction.REVERSE;
+        public static final Servo.Direction wristInvertR = Servo.Direction.REVERSE;
     }
 
     public static final class IntakeConstants {
 
         public static final String leftIntake0 = "leftIntake0";
-        public static final String rightIntake1 = "leftIntake1";
+        public static final String rightIntake1 = "rightIntake1";
     }
 
 }
