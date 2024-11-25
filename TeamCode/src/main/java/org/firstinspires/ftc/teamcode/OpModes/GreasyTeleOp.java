@@ -11,17 +11,16 @@ import org.firstinspires.ftc.teamcode.Subsystems.Wrist;
 @TeleOp(name = "greasy", group = "TeleOp")
 public class GreasyTeleOp extends LinearOpMode {
     DriveTrain s_DriveTrain;
-    Wrist s_Wrist;
-    Intake s_Intake;
+    //Wrist s_Wrist;
+    //Intake s_Intake;
 
 
     @Override
     public void runOpMode() {
         telemetry.update();
-
         s_DriveTrain = new DriveTrain(hardwareMap);
-        s_Wrist = new Wrist(hardwareMap);
-        s_Intake = new Intake(hardwareMap);
+        //s_Wrist = new Wrist(hardwareMap);
+        //s_Intake = new Intake(hardwareMap);
 
 
         waitForStart();
@@ -39,27 +38,27 @@ public class GreasyTeleOp extends LinearOpMode {
             }
 
             //s_Intake.setIntakePower(gamepad1.right_trigger - gamepad1.left_trigger);
-            if (gamepad1.right_trigger > 0) {
-              s_Intake.setIntakePower(1);
-                s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
-            } else if (gamepad1.left_trigger > 0) {
-               s_Intake.setIntakePower(-1);
-                s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
-            } else {
-               s_Intake.setIntakePower(0);
-            }
-
-            if (gamepad1.right_bumper){
-                s_Wrist.setAngle(Constants.WristConstants.barAngle);
-                //Will eventually say shoot out horizontal slides :p
-            } else if (gamepad1.left_bumper){
-                s_Wrist.setAngle(Constants.WristConstants.barAngle);
-                //Will pull in horizontal slides
-            }
-
-            if(gamepad1.dpad_down){
-                s_Wrist.setAngle(Constants.WristConstants.transferAngle);
-            }
+//            if (gamepad1.right_trigger > 0) {
+//              //s_Intake.setIntakePower(1);
+//                s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
+//            } else if (gamepad1.left_trigger > 0) {
+//               //s_Intake.setIntakePower(-1);
+//                s_Wrist.setAngle(Constants.WristConstants.intakeAngle);
+//            } else {
+//               //-s_Intake.setIntakePower(0);
+//            }
+//
+//            if (gamepad1.right_bumper){
+//                s_Wrist.setAngle(Constants.WristConstants.barAngle);
+//                //Will eventually say shoot out horizontal slides :p
+//            } else if (gamepad1.left_bumper){
+//                s_Wrist.setAngle(Constants.WristConstants.barAngle);
+//                //Will pull in horizontal slides
+//            }
+//
+//            if(gamepad1.dpad_down){
+//                s_Wrist.setAngle(Constants.WristConstants.transferAngle);
+//            }
 
             s_DriveTrain.periodic(telemetry);
             telemetry.update();

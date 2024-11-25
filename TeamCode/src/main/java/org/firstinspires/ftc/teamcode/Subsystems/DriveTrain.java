@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -13,10 +14,10 @@ import org.firstinspires.ftc.teamcode.Constants.DriveTrainConstants;
 
 public class DriveTrain {
 
-    private DriveMotor frontLeft0;
-    private DriveMotor frontRight1;
-    private DriveMotor backLeft2;
-    private DriveMotor backRight3;
+    private DcMotor frontLeft0;
+    private DcMotor frontRight1;
+    private DcMotor backLeft2;
+    private DcMotor backRight3;
 
     private BNO055IMU imu;
 
@@ -24,10 +25,10 @@ public class DriveTrain {
     private double yawOffset = 0.0;
 
     public DriveTrain(HardwareMap hardwareMap) {
-        frontLeft0 = new DriveMotor(hardwareMap, DriveTrainConstants.frontLeftMotor);
-        frontRight1 = new DriveMotor(hardwareMap, DriveTrainConstants.frontRightMotor);
-        backLeft2 = new DriveMotor(hardwareMap, DriveTrainConstants.backLeftMotor);
-        backRight3 = new DriveMotor(hardwareMap, DriveTrainConstants.backRightMotor);
+        frontLeft0 = hardwareMap.get(DcMotor.class, DriveTrainConstants.frontLeftMotor);
+        frontRight1 = hardwareMap.get(DcMotor.class, DriveTrainConstants.frontRightMotor);
+        backLeft2 = hardwareMap.get(DcMotor.class, DriveTrainConstants.backLeftMotor);
+        backRight3 = hardwareMap.get(DcMotor.class, DriveTrainConstants.backRightMotor);
 
         frontLeft0.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight1.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -56,7 +57,7 @@ public class DriveTrain {
         double fieldOrientedX = driveX * cos - driveY * sin;
         double fieldOrientedY = driveX * sin + driveY * cos;
 
-        //fieldOrientedX *= DriveTrainConstants.strafingBalancer;  // Counteract imperfect strafing
+        fieldOrientedX *= DriveTrainConstants.strafingBalancer;  // Counteract imperfect strafing
 
         double denominator = Math.max(Math.abs(fieldOrientedY) + Math.abs(fieldOrientedX) + Math.abs(rotation), 1);
 
@@ -65,10 +66,10 @@ public class DriveTrain {
         double frontRightPower = (fieldOrientedY - fieldOrientedX - rotation) / denominator;
         double backRightPower = (fieldOrientedY + fieldOrientedX - rotation) / denominator;
 
-        frontLeft0.set(frontLeftPower);
-        frontRight1.set(frontRightPower);
-        backLeft2.set(backLeftPower);
-        backRight3.set(backRightPower);
+        frontLeft0.setPower(frontLeftPower);
+        frontRight1.setPower(frontRightPower);
+        backLeft2.setPower(backLeftPower);
+        backRight3.setPower(backRightPower);
     }
 
     /**
@@ -111,15 +112,11 @@ public class DriveTrain {
         telemetry.addData("Heading: ", getHeading());
 
         telemetry.addData("Front Left Power: ", frontLeft0.getPower());
-        telemetry.addData("Front Left RPM: ", frontLeft0.getRPM());
 
         telemetry.addData("Front Right Power: ", frontRight1.getPower());
-        telemetry.addData("Front Right RPM: ", frontRight1.getRPM());
 
         telemetry.addData("Back Left Power: ", backLeft2.getPower());
-        telemetry.addData("Back Left RPM: ", backLeft2.getRPM());
 
         telemetry.addData("Back Right Power: ", backRight3.getPower());
-        telemetry.addData("Back Right RPM: ", backRight3.getRPM());
     }
 }
