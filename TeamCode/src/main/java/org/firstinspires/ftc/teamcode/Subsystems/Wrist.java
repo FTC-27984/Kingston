@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
-    Servo leftWrist2;
-    Servo rightWrist3;
+    private final Servo leftWrist2;
+    private final Servo rightWrist3;
     double intakeAngle = WristConstants.intakeAngle;
     double teleopAngle = WristConstants.transferAngle;
     double barAngle = WristConstants.barAngle;

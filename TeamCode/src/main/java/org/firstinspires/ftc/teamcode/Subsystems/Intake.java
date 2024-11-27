@@ -7,8 +7,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Constants;
 
 public class Intake {
-    CRServo leftIntake0;
-    CRServo rightIntake1;
+
+    private final CRServo leftIntake0;
+    private final CRServo rightIntake1;
+
     public Intake(HardwareMap hardwareMap) {
         leftIntake0 = hardwareMap.get(CRServo.class, Constants.IntakeConstants.leftIntake0);
         rightIntake1 = hardwareMap.get(CRServo.class, Constants.IntakeConstants.rightIntake1);

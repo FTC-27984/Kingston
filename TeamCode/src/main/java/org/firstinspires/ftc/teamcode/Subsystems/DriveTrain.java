@@ -14,15 +14,14 @@ import org.firstinspires.ftc.teamcode.Constants.DriveTrainConstants;
 
 public class DriveTrain {
 
-    private DcMotor frontLeft0;
-    private DcMotor frontRight1;
-    private DcMotor backLeft2;
-    private DcMotor backRight3;
+    private final DcMotor frontLeft0;
+    private final DcMotor frontRight1;
+    private final DcMotor backLeft2;
+    private final DcMotor backRight3;
 
-    private BNO055IMU imu;
+    private final BNO055IMU imu;
 
-    private Orientation angles;
-    private double yawOffset = 0.0;
+    private double yawOffset;
 
     public DriveTrain(HardwareMap hardwareMap) {
         frontLeft0 = hardwareMap.get(DcMotor.class, DriveTrainConstants.frontLeftMotor);
@@ -35,12 +34,17 @@ public class DriveTrain {
         backLeft2.setDirection(DcMotorSimple.Direction.FORWARD);
         backRight3.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        frontLeft0.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         imu.initialize(parameters);
 
-        yawOffset = imu.getAngularOrientation().firstAngle;
+        yawOffset = imu.getAngularOrientation().firstAngle - DriveTrainConstants.controlHubOffset;
     }
 
     public void drive(double driveY, double driveX, double rotation) {
@@ -78,7 +82,7 @@ public class DriveTrain {
      * @return heading of the robot
      */
     public double getRawHeading() {
-        angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         return angles.firstAngle;
     }
 
@@ -86,7 +90,7 @@ public class DriveTrain {
      * Updates the yaw offset to the current heading
      */
     public void resetYaw() {
-        yawOffset = getRawHeading();
+        yawOffset = getRawHeading() - DriveTrainConstants.controlHubOffset;
     }
 
     /**
