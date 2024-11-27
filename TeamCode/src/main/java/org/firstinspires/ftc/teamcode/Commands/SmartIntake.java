@@ -11,10 +11,10 @@ public class SmartIntake{
     Wrist s_Wrist;
     Extension s_Extension;
 
-    public SmartIntake(Intake s_Intake, Wrist s_Wrist, Extension s_Extesion) {
+    public SmartIntake(Intake s_Intake, Wrist s_Wrist, Extension s_Extension) {
         this.s_Intake = s_Intake;
         this.s_Wrist = s_Wrist;
-        this.s_Extension = s_Extesion;
+        this.s_Extension = s_Extension;
     }
 
 }
