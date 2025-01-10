@@ -1,62 +1,58 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.Servo;
+public final class Constants {
 
-public class Constants {
+    // Drive Motors Config
+    public static final String LEFT_BACK_DRIVE = "left_back_drive";  // Config name for left back drive motor
+    public static final String RIGHT_BACK_DRIVE = "right_back_drive"; // Config name for right back drive motor
 
-    public static final class DriveTrainConstants {
+    // Arm Motors Config
+    public static final String ARM_EXTENSION_MOTOR = "arm_extenstion"; // Config name for arm extension motor
+    public static final String ARM_ROTATION_MOTOR = "arm_rotation"; // Config name for arm rotation motor
 
-        public static final String frontLeftMotor = "frontLeft0";
-        public static final String frontRightMotor = "frontRight1";
-        public static final String backLeftMotor = "backLeft2";
-        public static final String backRightMotor = "backRight3";
+    // Intake Servo Config
+    public static final String INTAKE_SERVO = "intake"; // Config name for intake servo
 
-        public static final double strafingBalancer = 1.1;
 
-        public static final double ticksPerRevolution = 537.6; //Ticks per revolution on the NeveRest Orbital 20 Gearmotor
+    
+    // General Constants
+    public static final double TELEOP_LOOP_DELAY = 0.1; // Delay between loops in seconds
+    public static final int TELEMETRY_UPDATE_INTERVAL = 100; // Milliseconds between telemetry updates
+    
+    // Drive System Constants
+    public static final double DRIVE_MAX_SPEED = 1.0; // Maximum drive motor power
+    public static final double DRIVE_MIN_SPEED = 0.2; // Minimum drive motor power
 
-        public static final double controlHubOffset = 0;
-    }
+    //Arm Subsystem Constants
+    public static final int ARM_POSITION_INIT = 300;
+    public static final int ARM_POSITION_INTAKE = 450;
+    public static final int ARM_POSITION_WALL_GRAB = 1100;
+    public static final int ARM_POSITION_WALL_UNHOOK = 1700;
+    public static final int ARM_POSITION_HOVER_HIGH = 2600;
+    public static final int ARM_POSITION_CLIP_HIGH = 2100;
+    public static final int ARM_POSITION_LOW_BASKET = 2500;
 
-    public static final class WristConstants {
-        public static final String leftWrist2 = "leftWrist2";
-        public static final String rightWrist3 = "rightWrist3";
-        public static final double intakeAngle = 0.05;
-        public static final double transferAngle = 0;
-        public static final double barAngle = 0.25;
-        public static final Servo.Direction wristInvertL = Servo.Direction.FORWARD;
-        public static final Servo.Direction wristInvertR = Servo.Direction.REVERSE;
-    }
+    // Arm Extension Constants
+    public static final double ARM_EXTEND_POWER = 0.8;  // Power for extending the arm
+    public static final double ARM_RETRACT_POWER = -0.8; // Power for retracting the arm
+    public static final int ARM_MAX_POSITION = 2000;    // Maximum encoder count for fully extended arm
+    public static final int ARM_MIN_POSITION = 0;       // Minimum encoder count for fully retracted arm
+    public static final int ARM_MOTOR_RUNTIME_LIMIT = 2000; // Runtime limit for arm motor (milliseconds)
 
-    public static final class IntakeConstants {
+    // Arm Rotation Constants
+    public static final double ROTATION_GEAR_RATIO = 5.0; // e.g., rotationGearRatio
+    public static final int ROTATION_TICKS_PER_REVOLUTION = 1120; // e.g., rotationTicksPerRevolution
+    public static final double ROTATION_MIN_ANGLE = 0.0; // e.g., rotationMinAngle
+    public static final double ROTATION_MAX_ANGLE = 180.0; // e.g., rotationMaxAngle
+    public static final double ARM_ROTATION_POWER = 0.5; // Default rotation motor power
 
-        public static final String leftIntake0 = "leftIntake0";
-        public static final String rightIntake1 = "rightIntake1";
-    }
+    // Intake Subsystem Constants
+    public static final double INTAKE_IN_POWER = 1.0;  // Power for intake to pull objects in
+    public static final double INTAKE_OUT_POWER = -1.0; // Power for intake to push objects out
+    public static final double INTAKE_OFF_POWER = 0.0;  // Power to stop intake
 
-    public static final class ExtensionConstants {
-        public static final String extension = "extension3";
-        public static final double retracted = 0.5; //TODO FUIND THIS VALUE
-        public static final double extended = 0;  //TODO FIND THIS VALUE
-    }
-
-    public static final class ArmConstants {
-        public static final String arm = "arm4";
-        public static final double exchangeAngle = 0.99; //TODO FIND THIS VALUE
-        public static final double dropAngle = 0.4; //TODO FIND THIS VALUE
-    }
-
-    public static final class ClawConstants {
-        public static final String claw = "claw5";
-        public static final double open = 1;    //TODO FIND THIS
-        public static final double closed = 0;  //TODO FIND THIS TANGLE TOO
-    }
-
-    public static final class ElevatorConstants {
-        public static final String elevator = "elevator0";
-        public static final int highBasket = 2000;
-        public static final int lowBasket = 0;
-        public static final int exchange = 0;
-    }
-
+    // PID Controller Constants (if used)
+    // public static final double PID_P = 0.0; // Proportional gain
+    // public static final double PID_I = 0.0; // Integral gain
+    // public static final double PID_D = 0.0; // Derivative gain
 }
