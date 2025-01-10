@@ -7,7 +7,7 @@ public final class Constants {
     public static final String RIGHT_BACK_DRIVE = "right_back_drive"; // Config name for right back drive motor
 
     // Arm Motors Config
-    public static final String ARM_EXTENSION_MOTOR = "arm_extenstion"; // Config name for arm extension motor
+    public static final String ARM_EXTENSION_MOTOR = "arm_extension"; // Config name for arm extension motor
     public static final String ARM_ROTATION_MOTOR = "arm_rotation"; // Config name for arm rotation motor
 
     // Intake Servo Config

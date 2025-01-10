@@ -18,7 +18,7 @@ public class Drivetrain extends CommandBase {
 
     @Override
     public void execute() {
-        driveSubsystem.drive(0.5, 0.5, 0); //change yaw value later pls
+        driveSubsystem.drive(0.5, 0.5); //change values later
     }
 
     @Override
