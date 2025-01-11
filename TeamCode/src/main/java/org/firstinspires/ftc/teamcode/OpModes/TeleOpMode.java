@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Drivetrain;
 import org.firstinspires.ftc.teamcode.Commands.IntakeIn;
@@ -16,8 +17,8 @@ import org.firstinspires.ftc.teamcode.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "pooptele", group = "TeleOp")
-public class TeleOp extends CommandOpMode {
+@TeleOp(name = "pooptele", group = "TeleOp")
+public class TeleOpMode extends CommandOpMode {
 
     @Override
     public void initialize() {
