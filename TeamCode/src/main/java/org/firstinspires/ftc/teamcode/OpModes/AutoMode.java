@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode; // Ensure this matches your directory structure
+package org.firstinspires.ftc.teamcode.OpModes; // Ensure this matches your directory structure
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous; // Required for Autonomous annotation
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode; // Required for LinearOpMode
 
 @Autonomous(name = "Dummy Auto", group = "Test")
-public class DummyAuto extends LinearOpMode {
+public class AutoMode extends LinearOpMode {
 
     @Override
     public void runOpMode() {
